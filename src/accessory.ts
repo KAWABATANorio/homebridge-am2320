@@ -50,7 +50,7 @@ class AM2320Plugin implements AccessoryPlugin {
         callback(undefined, value);
       });
     
-    this.humidityService = new hap.Service.TemperatureSensor(this.name_humidity, this.name_humidity);
+    this.humidityService = new hap.Service.HumiditySensor(this.name_humidity, this.name_humidity);
     this.humidityService.getCharacteristic(hap.Characteristic.CurrentRelativeHumidity)
       .on(CharacteristicEventTypes.GET, async (callback: CharacteristicGetCallback) => {
         const value = await self.am2320.getCurrentRelativeHumidity();
