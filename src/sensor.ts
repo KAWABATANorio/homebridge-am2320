@@ -22,7 +22,7 @@ export default class AM2320
     if ('i2cBusNo' in this.options) this.options.i2cBusNo = parseInt(this.options.i2cBusNo);
     if ('i2cAddress' in this.options) this.options.i2cAddress = parseInt(this.options.i2cAddress);
     console.log(`AM23280 sensor options: ${JSON.stringify(this.options)}`);
-    // this.sensor = new i2c(this.options.i2cAddress, { device: '/dev/i2c-' + this.options.i2cBusNo });
+    this.sensor = new i2c(this.options.i2cAddress, { device: '/dev/i2c-' + this.options.i2cBusNo });
 
     var self = this;
     setTimeout(() => {
