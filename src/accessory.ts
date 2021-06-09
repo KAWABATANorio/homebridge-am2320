@@ -41,13 +41,21 @@ class AM2320Plugin implements AccessoryPlugin {
 
     this.am2320 = new AM2320(config.options);
 
+    const self = this;
+
     this.temperatureService = new hap.Service.TemperatureSensor(this.name_temperature, this.name_temperature);
     this.temperatureService.getCharacteristic(hap.Characteristic.CurrentTemperature)
-      .on(CharacteristicEventTypes.GET, this.getCurrentTemperature);
-
+      .on(CharacteristicEventTypes.GET, async (callback: CharacteristicGetCallback) => {
+        const value = await self.am2320.getCurrentTemperature();
+        callback(undefined, value);
+      });
+    
     this.humidityService = new hap.Service.TemperatureSensor(this.name_humidity, this.name_humidity);
     this.humidityService.getCharacteristic(hap.Characteristic.CurrentRelativeHumidity)
-      .on(CharacteristicEventTypes.GET, this.getCurrentRelativeHumidity);
+      .on(CharacteristicEventTypes.GET, async (callback: CharacteristicGetCallback) => {
+        const value = await self.am2320.getCurrentRelativeHumidity();
+        callback(undefined, value);
+      });
   
     this.informationService = new hap.Service.AccessoryInformation()
       .setCharacteristic(hap.Characteristic.Manufacturer, "Kawabata Farm")
@@ -74,16 +82,6 @@ class AM2320Plugin implements AccessoryPlugin {
       this.humidityService,
       this.informationService,
     ];
-  }
-
-  private async getCurrentTemperature(callback: CharacteristicGetCallback) {
-    const value = await this.am2320.getCurrentTemperature();
-    callback(undefined, value);
-  }
-
-  private async getCurrentRelativeHumidity(callback: CharacteristicGetCallback) {
-    const value = await this.am2320.getCurrentRelativeHumidity();
-    callback(undefined, value);
   }
 
 }
