@@ -41,11 +41,11 @@ class AM2320Plugin implements AccessoryPlugin {
 
     this.am2320 = new AM2320(config.options);
 
-    this.temperatureService = new hap.Service.TemperatureSensor(this.name_temperature);
+    this.temperatureService = new hap.Service.TemperatureSensor(this.name_temperature, this.name_temperature);
     this.temperatureService.getCharacteristic(hap.Characteristic.CurrentTemperature)
       .on(CharacteristicEventTypes.GET, this.getCurrentTemperature);
 
-    this.humidityService = new hap.Service.TemperatureSensor(this.name_humidity);
+    this.humidityService = new hap.Service.TemperatureSensor(this.name_humidity, this.name_humidity);
     this.humidityService.getCharacteristic(hap.Characteristic.CurrentRelativeHumidity)
       .on(CharacteristicEventTypes.GET, this.getCurrentRelativeHumidity);
   
