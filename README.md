@@ -38,5 +38,5 @@ This plugin creates two services: TemperatureSensor and HumiditySensor.
 
 ## License
 
-MIT
+Apache 2.0
 
