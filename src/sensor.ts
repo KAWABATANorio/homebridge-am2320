@@ -1,4 +1,4 @@
-// import i2c from "i2c";
+import i2c from "i2c";
 import _ from "lodash";
 
 export default class AM2320
